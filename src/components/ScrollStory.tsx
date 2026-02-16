@@ -4,33 +4,33 @@ import { useRef } from 'react';
 const storyMoments = [
   {
     id: 1,
-    image: "https://images.pexels.com/photos/1024998/pexels-photo-1024998.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: "/images/journey-1.jpg",
     title: "Khởi Đầu",
     description: "Ngày đầu tiên gặp nhau, định mệnh đã sắp đặt"
   },
   {
     id: 2,
-    image: "https://images.pexels.com/photos/2422278/pexels-photo-2422278.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: "/images/journey-2.jpg",
     title: "Những Bước Chân",
-    description: "Mỗi bước đi cùng nhau là một kỷ niệm đẹp"
+    description: "Mỗi bước đi cùng nhau là một kỷ niệm đẹp, lần đầu đi ăn, lần đầu nắm tay, lần đầu của những cái ôm và lần đầu của tình yêu... Tất cả đều là những khoảnh khắc em trân trọng và nhớ mãi"
   },
   {
     id: 3,
-    image: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    title: "Nụ Cười",
-    description: "Nụ cười em là ánh dương trong cuộc đời anh"
+    image: "/images/journey-3.jpg",
+    title: "Lần đầu của những lần đâu",
+    description: "Lần đầu tiên đi chơi cùng nhau, lần đầu tiên em thấy em không tách rời được chị, lần đầu tiên em cảm nhận được tình yêu thật sự, lần đầu chúng ta vượt qua những giới hạn và quấn lấy nhau :( "
   },
   {
     id: 4,
-    image: "https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: "/images/journey-4.jpg",
     title: "Cùng Nhau",
     description: "Vượt qua mọi thử thách, tay trong tay"
   },
   {
     id: 5,
-    image: "https://images.pexels.com/photos/2102934/pexels-photo-2102934.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: "/images/journey-5.jpg",
     title: "Tương Lai",
-    description: "Hành trình vẫn tiếp tục, mãi bên nhau"
+    description: "Hành trình vẫn tiếp tục, mãi bên nhau bây giờ và mãi mãi"
   }
 ];
 

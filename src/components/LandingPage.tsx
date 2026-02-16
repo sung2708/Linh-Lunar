@@ -28,7 +28,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           className="text-3xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-500 to-yellow-600 mb-6 md:mb-8 pt-6 leading-relaxed"
           style={{ fontFamily: "'Playfair Display', serif" }}
         >
-          Chào Nguyễn Diệu Linh
+          Xin chào Heo Linh của emmm :3
         </motion.h1>
 
         <motion.p
@@ -39,7 +39,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           className="text-base md:text-2xl text-yellow-100/90 mb-10 md:mb-12 max-w-2xl mx-auto italic font-light px-2"
           style={{ fontFamily: "'Be Vietnam Pro', sans-serif" }}
         >
-          Mở bao lì xì, thấy cả trời xuân.<br className="hidden md:block" />
+          Mở bao lì xì, thấy cả trời xuân. <br className="hidden md:block" />
           Chúc tình mình năm Bính Ngọ mãi bền lâu.
         </motion.p>
 
@@ -96,7 +96,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           className="text-yellow-500/50 mt-10 md:mt-12 text-[10px] md:text-sm tracking-[0.3em] uppercase"
           style={{ fontFamily: "'Be Vietnam Pro', sans-serif" }}
         >
-          — Bính Ngọ An Yên —
+          — Bình an Bính Ngọ, Hạnh phúc dành cho Linh —
         </motion.p>
       </motion.div>
     </div>

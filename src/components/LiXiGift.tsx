@@ -93,15 +93,32 @@ export default function LiXiGift() {
                       <X className="w-6 h-6 md:w-8 md:h-8" />
                     </button>
 
-                    <div className="relative overflow-hidden rounded-xl border-2 border-yellow-600 shadow-xl mb-6">
-                      <img
-                        src="https://images.pexels.com/photos/1024998/pexels-photo-1024998.jpeg?auto=compress&cs=tinysrgb&w=800"
-                        alt="Special Memory"
-                        className="w-full h-64 md:h-96 object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                    </div>
+                    <div className="relative overflow-hidden rounded-xl border-2 border-yellow-600 shadow-xl mb-6 group">
+                      {/* Bao bọc toàn bộ vùng ảnh bằng link MoMo */}
+                      <a
+                        href="https://lixi.momo.vn/lixi/km2OrN6OyaODpeA"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block relative cursor-pointer"
+                      >
+                        <img
+                          src="/images/lixi.jpg"
+                          alt="Special Memory"
+                          /* - object-contain: Đảm bảo hiện full ảnh, không bị mất góc nào.
+                            - bg-black/20: Tạo nền nhẹ nếu ảnh không lấp đầy khung hình.
+                          */
+                          className="w-full h-64 md:h-96 object-contain bg-black/20 transition-transform duration-500 group-hover:scale-105"
+                        />
 
+                        {/* Lớp phủ gradient mượt hơn */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80"></div>
+
+                        {/* Badge nhắc nhở nhấn vào (chỉ hiện trên mobile để dễ biết) */}
+                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-yellow-500 text-black text-xs font-bold px-3 py-1 rounded-full animate-bounce md:hidden">
+                          Nhấn để nhận lì xì MoMo 🧧
+                        </div>
+                      </a>
+                    </div>
                     <div className="relative">
                       <motion.button
                         onMouseDown={handleStartPress}
@@ -146,24 +163,24 @@ export default function LiXiGift() {
                     >
                       <h3 className="text-2xl md:text-4xl font-bold text-yellow-400 mb-6 text-center leading-tight"
                         style={{ fontFamily: "'Playfair Display', serif" }}>
-                        Gửi Diệu Linh Yêu Dấu
+                        Gửi Diệu Linh của em!
                       </h3>
 
                       <div className="space-y-4 md:space-y-6 text-base md:text-xl leading-relaxed font-light text-justify"
                         style={{ fontFamily: "'Be Vietnam Pro', sans-serif" }}>
-                        <p className="italic text-yellow-400/80">Năm Bính Ngọ 2026 đã đến,</p>
-                        <p>Anh muốn gửi đến em những lời chúc tốt đẹp nhất. Qua bao ngày tháng bên nhau, em đã là nguồn động lực, là ánh sáng dẫn đường cho anh.</p>
-                        <p>Năm mới này, anh chúc em luôn rạng rỡ như những cánh hoa mai đầu xuân, mạnh mẽ như chú ngựa Bính Ngọ phi nước đại. Chúc em luôn vui vẻ, khỏe mạnh và đạt được mọi ước mơ.</p>
+                        <p className="italic text-yellow-400/80">Năm mới lại đến</p>
+                        <p>Em muốn gửi đến chị những lời chúc tốt đẹp nhất. Qua bao ngày tháng bên nhau, chị đã là nguồn động lực, là ánh sáng dẫn đường cho em.</p>
+                        <p>Năm mới này, em chúc chị luôn rạng rỡ như những cánh hoa mai đầu xuân, mạnh mẽ như chú ngựa Bính Ngọ phi nước đại. Chúc chị luôn vui vẻ, khỏe mạnh và đạt được mọi ước mơ, sẽ bớt ôm đồm, ích kỷ hơn một chút nhé, sẽ luôn là người em yêu thương và trân trọng.</p>
 
                         <div className="py-6 text-center">
                           <p className="text-2xl md:text-4xl text-yellow-400 font-bold"
                             style={{ fontFamily: "'Playfair Display', serif" }}>
-                            Yêu em nhiều lắm! ❤️
+                            ANH YÊU EM NHIỀU LẮM ❤️
                           </p>
                         </div>
 
                         <p className="text-right italic text-yellow-500 mt-4 text-sm md:text-base">
-                          — Người luôn yêu em —
+                          — Người luôn yêu chị :3 —
                         </p>
                       </div>
                     </motion.div>
