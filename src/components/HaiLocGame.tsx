@@ -12,7 +12,7 @@ const memories: Memory[] = [
   { id: 1, caption: "Lần đầu đi chung với nhau, có những thẹn thùng :3", imageUrl: "/images/lixi-1.jpg" },
   { id: 2, caption: "Những buổi chiều cùng nhau đi dạo, mỗi bước chân là một kỷ niệm", imageUrl: "/images/lixi-2.jpg" },
   { id: 3, caption: "Những lần nắm tay, mỗi giây phút đều là một khoảnh khắc đáng nhớ", imageUrl: "/images/lixi-3.jpg" },
-  { id: 4, caption: "Những lúc mệt mõi, em sẽ luôn là bờ vai cho chị", imageUrl: "/images/lixi-4.jpg" },
+  { id: 4, caption: "Những lúc mệt mỏi, em sẽ luôn là bờ vai cho chị", imageUrl: "/images/lixi-4.jpg" },
   { id: 5, caption: "Những giây phút vô lo, vô nghĩ, chỉ cần bên chị là đủ", imageUrl: "/images/lixi-5.jpg" }
 ];
 
@@ -41,40 +41,42 @@ export default function HaiLocGame() {
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         className="text-center mb-8 z-20 relative"
       >
         <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-4"
           style={{ fontFamily: "'Playfair Display', serif" }}>
           Hái Lộc Đầu Xuân
         </h2>
-        <p className="text-yellow-200/80 text-sm md:text-lg font-light max-w-xs md:max-w-md mx-auto"
+        <p className="text-yellow-200/80 text-sm md:text-lg font-light max-w-xs md:max-w-md mx-auto italic"
           style={{ fontFamily: "'Be Vietnam Pro', sans-serif" }}>
-          Gói ghém tình yêu vào những lộc xuân, cùng ANH mở ra những thước phim ngọt ngào nhất của chúng mình.
+          "Gói ghém tình yêu vào những lộc xuân, cùng ANH mở ra những thước phim ngọt ngào nhất của chúng mình."
         </p>
       </motion.div>
 
-      {/* Vùng chứa cây mai: Ép chiều cao cố định để không bị ẩn trên mobile */}
-      <div className="relative max-w-lg mx-auto h-[550px] md:h-[750px] flex justify-center items-center">
+      {/* Vùng chứa cây: Quan trọng phải có min-height */}
+      <div className="relative max-w-lg mx-auto h-[550px] md:h-[750px] flex justify-center items-center overflow-visible">
 
-        {/* SVG Thân Cây Mai */}
         <svg
-          className="absolute inset-0 w-full h-full z-0 pointer-events-none"
+          className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-visible"
           viewBox="0 0 400 700"
           preserveAspectRatio="xMidYMid meet"
           xmlns="http://www.w3.org/2000/svg"
         >
+          {/* SỬA LỖI: Dùng animate thay vì whileInView nếu mobile không nhạy */}
           <motion.path
-            initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 2, ease: "easeInOut" }}
             d="M200,650 Q180,500 200,350 Q220,200 200,50"
             fill="none"
             stroke="#92400e"
             strokeWidth="12"
             strokeLinecap="round"
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 1 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 2.5, ease: "easeInOut" }}
           />
 
-          {/* Render Hoa Mai dọc theo thân cây */}
+          {/* Render Hoa Mai */}
           {[...Array(25)].map((_, i) => {
             const xPos = 200 + Math.sin(i * 1.5) * (30 + i * 2);
             const yPos = 620 - (i * 22);
@@ -83,7 +85,8 @@ export default function HaiLocGame() {
                 key={i}
                 initial={{ scale: 0, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.5 + i * 0.03, duration: 0.5 }}
+                viewport={{ once: false, amount: 0.1 }}
+                transition={{ delay: 0.8 + i * 0.04, duration: 0.5 }}
               >
                 <circle cx={xPos} cy={yPos} r={i % 3 === 0 ? "6" : "4"} fill="#fbbf24" />
                 <circle cx={xPos} cy={yPos} r="1.5" fill="#f59e0b" />
@@ -96,10 +99,11 @@ export default function HaiLocGame() {
         {memories.map((memory, index) => (
           <motion.div
             key={memory.id}
-            initial={{ scale: 0, rotate: -20 }}
-            whileInView={{ scale: 1, rotate: 0 }}
-            transition={{ delay: 1 + index * 0.2 }}
-            whileTap={{ scale: 0.9 }}
+            initial={{ scale: 0, rotate: -20, opacity: 0 }}
+            whileInView={{ scale: 1, rotate: 0, opacity: 1 }}
+            viewport={{ once: false, amount: 0.1 }}
+            transition={{ delay: 1.5 + index * 0.2, type: 'spring', stiffness: 100 }}
+            whileTap={{ scale: 0.85 }}
             onClick={() => handleEnvelopeClick(memory.id)}
             className="absolute cursor-pointer z-10"
             style={envelopePositions[index]}
@@ -120,7 +124,6 @@ export default function HaiLocGame() {
         </p>
       </div>
 
-      {/* Modal hiển thị kỷ niệm */}
       <AnimatePresence>
         {selectedMemory && (
           <motion.div
