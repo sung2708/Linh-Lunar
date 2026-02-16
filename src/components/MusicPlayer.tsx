@@ -70,9 +70,9 @@ export default function MusicPlayer() {
         )}
       </motion.button>
 
-      <audio ref={audioRef} loop>
-        {/* Đảm bảo tệp bg.mp3 nằm trong thư mục public/music/ */}
-        <source src="/music/bg.mp3" type="audio/mpeg" />
+      <audio ref={audioRef} loop preload="auto">
+        {/* Thêm window.location.origin để ép trình duyệt tìm từ gốc website */}
+        <source src={`${window.location.origin}/music/bg.mp3`} type="audio/mpeg" />
       </audio>
     </div>
   );
