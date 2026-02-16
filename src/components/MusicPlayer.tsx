@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import backgroundMusic from '../assets/music/bg.mp3';
 import { Volume2, VolumeX } from 'lucide-react';
 
 export default function MusicPlayer() {
@@ -8,6 +7,7 @@ export default function MusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [rotation, setRotation] = useState(0);
 
+  // Hiệu ứng xoay đĩa khi đang phát nhạc
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isPlaying) {
@@ -18,7 +18,28 @@ export default function MusicPlayer() {
     return () => clearInterval(interval);
   }, [isPlaying]);
 
-  const togglePlay = () => {
+  // Cố gắng tự động phát nhạc khi component được nạp
+  useEffect(() => {
+    const attemptPlay = () => {
+      if (audioRef.current) {
+        audioRef.current.play()
+          .then(() => setIsPlaying(true))
+          .catch(() => {
+            // Trình duyệt chặn tự động phát, đợi tương tác người dùng
+            console.log("Autoplay blocked. Waiting for user interaction.");
+          });
+      }
+    };
+
+    attemptPlay();
+
+    // Lắng nghe sự kiện click toàn trang để kích hoạt nhạc nếu autoplay bị chặn
+    window.addEventListener('click', attemptPlay, { once: true });
+    return () => window.removeEventListener('click', attemptPlay);
+  }, []);
+
+  const togglePlay = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Ngăn chặn sự kiện click lan ra window
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
@@ -48,8 +69,10 @@ export default function MusicPlayer() {
           <VolumeX className="w-6 h-6 text-yellow-400 relative z-10" />
         )}
       </motion.button>
+
       <audio ref={audioRef} loop>
-        <source src={backgroundMusic} type="audio/mpeg" />
+        {/* Đảm bảo tệp bg.mp3 nằm trong thư mục public/music/ */}
+        <source src="/music/bg.mp3" type="audio/mpeg" />
       </audio>
     </div>
   );

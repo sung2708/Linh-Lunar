@@ -48,7 +48,6 @@ export default function LiXiGift() {
             Lì Xì Đặc Biệt
           </h2>
           <p className="text-yellow-200/80 text-lg mb-12 font-light"
-            // Đổi sang Be Vietnam Pro
             style={{ fontFamily: "'Be Vietnam Pro', sans-serif" }}>
             Một món quà dành riêng cho em
           </p>

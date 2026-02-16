@@ -12,11 +12,12 @@ export default function AnniversaryCounter() {
     const updateCounter = () => {
       const now = new Date();
       const diff = now.getTime() - startDate.getTime();
+      const absoluteDiff = Math.abs(diff);
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      const days = Math.floor(absoluteDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((absoluteDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((absoluteDiff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((absoluteDiff % (1000 * 60)) / 1000);
 
       setTime({ days, hours, minutes, seconds });
     };
