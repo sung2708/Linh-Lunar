@@ -146,7 +146,7 @@ export default function LiXiGift() {
                           transition={{ duration: 0.1 }}
                         ></motion.div>
                         <span className="relative z-10">
-                          {pressProgress === 0 ? 'Giữ để xem điều đặc biệt <3' : 'Đang mở thư...'}
+                          {pressProgress === 0 ? 'Giữ để xem thư tình' : 'Đang mở thư...'}
                         </span>
                       </motion.button>
                       <p className="text-yellow-300/60 text-xs md:text-sm mt-3 text-center" style={{ fontFamily: "'Be Vietnam Pro', sans-serif" }}>
