@@ -6,18 +6,23 @@ export default function AnniversaryCounter() {
   const [time, setTime] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    // Ngày kỷ niệm của hai bạn
-    const startDate = new Date('2024-01-01T00:00:00');
+    // Mốc thời gian bắt đầu yêu nhau: 15/08/2025
+    const startDate = new Date('2025-08-15T00:00:00').getTime();
 
     const updateCounter = () => {
-      const now = new Date();
-      const diff = now.getTime() - startDate.getTime();
-      const absoluteDiff = Math.abs(diff);
+      const now = new Date().getTime();
+      const diff = now - startDate;
 
-      const days = Math.floor(absoluteDiff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((absoluteDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((absoluteDiff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((absoluteDiff % (1000 * 60)) / 1000);
+      // Nếu hiện tại chưa đến ngày 15/08/2025, bộ đếm sẽ hiển thị 0
+      if (diff <= 0) {
+        setTime({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
       setTime({ days, hours, minutes, seconds });
     };
@@ -43,7 +48,6 @@ export default function AnniversaryCounter() {
             animate={{ rotateX: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
             className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-yellow-400 to-yellow-600 text-center"
-            // Font Playfair cho con số để tạo nét cổ điển, sang trọng
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             {String(value).padStart(2, '0')}
@@ -57,7 +61,6 @@ export default function AnniversaryCounter() {
       </div>
       <span
         className="text-yellow-200 text-sm md:text-base uppercase tracking-[0.2em] font-medium"
-        // Font Be Vietnam Pro cho nhãn thời gian
         style={{ fontFamily: "'Be Vietnam Pro', sans-serif" }}
       >
         {label}
@@ -93,7 +96,7 @@ export default function AnniversaryCounter() {
             className="text-yellow-100/70 text-lg md:text-xl font-light tracking-wide"
             style={{ fontFamily: "'Be Vietnam Pro', sans-serif" }}
           >
-            Đã bên nhau qua từng khoảnh khắc quý giá
+            Chúng ta đã cùng nhau đi qua
           </p>
         </motion.div>
 
@@ -116,17 +119,7 @@ export default function AnniversaryCounter() {
           >
             "Mỗi giây phút bên em đều là một món quà vô giá"
           </p>
-
-          <motion.div
-            animate={{
-              opacity: [0.4, 1, 0.4],
-              scale: [0.9, 1.1, 0.9]
-            }}
-            transition={{ duration: 3, repeat: Infinity }}
-            className="text-red-500 text-6xl"
-          >
-            ❤
-          </motion.div>
+          <div className="text-red-500 text-6xl">❤️</div>
         </motion.div>
       </div>
     </div>

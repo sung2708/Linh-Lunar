@@ -72,7 +72,7 @@ export default function MusicPlayer() {
 
       <audio ref={audioRef} loop preload="auto">
         {/* Thêm window.location.origin để ép trình duyệt tìm từ gốc website */}
-        <source src={`${window.location.origin}/music/bg.mp3`} type="audio/mpeg" />
+        <source src="https://res.cloudinary.com/dvqsoe9nx/video/upload/v1771253094/ud2xlioddzzjm5yp5o1f.mp3" type="audio/mpeg" />
       </audio>
     </div>
   );
