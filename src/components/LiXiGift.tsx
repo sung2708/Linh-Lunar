@@ -104,18 +104,29 @@ export default function LiXiGift() {
                         <img
                           src="/images/lixi.jpg"
                           alt="Special Memory"
-                          /* - object-contain: Đảm bảo hiện full ảnh, không bị mất góc nào.
-                            - bg-black/20: Tạo nền nhẹ nếu ảnh không lấp đầy khung hình.
-                          */
                           className="w-full h-64 md:h-96 object-contain bg-black/20 transition-transform duration-500 group-hover:scale-105"
                         />
 
-                        {/* Lớp phủ gradient mượt hơn */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80"></div>
+                        {/* Lớp phủ gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
 
-                        {/* Badge nhắc nhở nhấn vào (chỉ hiện trên mobile để dễ biết) */}
-                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-yellow-500 text-black text-xs font-bold px-3 py-1 rounded-full animate-bounce md:hidden">
-                          Nhấn để nhận lì xì MoMo 🧧
+                        {/* Nút bấm nhảy nhảy - Hiển thị trên cả Desktop và Mobile */}
+                        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-full px-4 flex justify-center">
+                          <motion.div
+                            animate={{
+                              y: [0, -12, 0],
+                              scale: [1, 1.05, 1]
+                            }}
+                            transition={{
+                              duration: 1.5,
+                              repeat: Infinity,
+                              ease: "easeInOut"
+                            }}
+                            className="bg-[#A50064] text-white px-6 py-3 rounded-full font-bold shadow-[0_0_20px_rgba(165,0,100,0.5)] border border-pink-400 flex items-center gap-2 whitespace-nowrap"
+                          >
+                            <span className="text-xl">🧧</span>
+                            <span className="text-sm md:text-base">NHẬN LÌ XÌ MOMO</span>
+                          </motion.div>
                         </div>
                       </a>
                     </div>
