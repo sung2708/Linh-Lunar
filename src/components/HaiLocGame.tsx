@@ -48,49 +48,48 @@ export default function HaiLocGame() {
     }
   };
 
+  // Tọa độ đã tối ưu cho mobile (dùng % để co giãn tốt hơn)
   const envelopePositions = [
-    { top: '15%', left: '20%' },
-    { top: '25%', right: '15%' },
-    { top: '40%', left: '30%' },
-    { top: '50%', right: '25%' },
-    { top: '65%', left: '40%' },
+    { top: '10%', left: '15%' },
+    { top: '22%', right: '10%' },
+    { top: '38%', left: '20%' },
+    { top: '55%', right: '15%' },
+    { top: '70%', left: '25%' },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-red-950/30 to-black py-20 px-6 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-black via-red-950/30 to-black py-10 md:py-20 px-4 relative overflow-hidden">
       <motion.div
-        initial={{ opacity: 0, y: -50 }}
+        initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="text-center mb-16"
+        className="text-center mb-8 md:mb-16"
       >
-        <h2 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-4"
-          // Thay đổi sang Playfair Display
+        <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-4"
           style={{ fontFamily: "'Playfair Display', serif" }}>
           Hái Lộc Đầu Xuân
         </h2>
-        <p className="text-yellow-200/80 text-lg font-light"
-          // Thay đổi sang Be Vietnam Pro
+        <p className="text-yellow-200/80 text-base md:text-lg font-light max-w-md mx-auto"
           style={{ fontFamily: "'Be Vietnam Pro', sans-serif" }}>
-          Chạm vào các bao lì xì trên cây mai để khám phá những kỷ niệm đẹp
+          Chạm vào bao lì xì trên cây để khám phá kỷ niệm
         </p>
       </motion.div>
 
-      <div className="relative max-w-4xl mx-auto h-[800px]">
-        {/* SVG Tree Trunk */}
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 800">
+      {/* Container của cây: Tự co giãn theo màn hình */}
+      <div className="relative max-w-lg mx-auto h-[500px] md:h-[700px]">
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 700" preserveAspectRatio="xMidYMid meet">
           <motion.path
             initial={{ pathLength: 0 }}
             whileInView={{ pathLength: 1 }}
             transition={{ duration: 2 }}
-            d="M200,700 Q180,600 200,500 Q220,400 200,300 Q180,200 200,100"
+            d="M200,650 Q180,500 200,350 Q220,200 200,50"
             fill="none"
             stroke="#92400e"
-            strokeWidth="12"
+            strokeWidth="10"
             strokeLinecap="round"
           />
 
-          {[...Array(30)].map((_, i) => (
+          {[...Array(20)].map((_, i) => (
             <motion.g
               key={i}
               initial={{ scale: 0, opacity: 0 }}
@@ -98,18 +97,11 @@ export default function HaiLocGame() {
               transition={{ delay: 0.5 + i * 0.05, duration: 0.5 }}
             >
               <circle
-                cx={200 + (Math.random() - 0.5) * 200}
+                cx={200 + (Math.sin(i) * 120)}
                 cy={100 + i * 25}
-                r="8"
+                r="6"
                 fill="#fbbf24"
                 opacity="0.8"
-              />
-              <circle
-                cx={200 + (Math.random() - 0.5) * 200 + 5}
-                cy={100 + i * 25 + 5}
-                r="6"
-                fill="#fcd34d"
-                opacity="0.6"
               />
             </motion.g>
           ))}
@@ -121,27 +113,26 @@ export default function HaiLocGame() {
             initial={{ scale: 0, rotate: -180 }}
             whileInView={{ scale: 1, rotate: 0 }}
             transition={{ delay: 1 + index * 0.2, type: 'spring' }}
-            whileHover={{ scale: 1.2, rotate: 10 }}
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => handleEnvelopeClick(memory.id)}
-            className="absolute cursor-pointer"
+            className="absolute cursor-pointer z-10"
             style={envelopePositions[index]}
           >
-            <div className={`w-20 h-28 bg-gradient-to-br from-red-600 to-red-800 rounded-lg shadow-2xl border-2 border-yellow-500 flex items-center justify-center transition-all ${openedEnvelopes.includes(memory.id) ? 'opacity-50' : ''
+            {/* Kích thước bao lì xì nhỏ hơn trên mobile: w-14 h-20 */}
+            <div className={`w-14 h-20 md:w-20 md:h-28 bg-gradient-to-br from-red-600 to-red-800 rounded-lg shadow-2xl border-2 border-yellow-500 flex items-center justify-center transition-all ${
+                openedEnvelopes.includes(memory.id) ? 'opacity-40 grayscale-[0.5]' : ''
               }`}>
               <motion.div
-                animate={{
-                  boxShadow: openedEnvelopes.includes(memory.id)
-                    ? 'none'
-                    : [
-                      '0 0 10px rgba(212, 175, 55, 0.5)',
-                      '0 0 20px rgba(212, 175, 55, 1)',
-                      '0 0 10px rgba(212, 175, 55, 0.5)',
-                    ],
-                }}
+                animate={!openedEnvelopes.includes(memory.id) ? {
+                  boxShadow: [
+                    '0 0 5px rgba(212, 175, 55, 0.5)',
+                    '0 0 15px rgba(212, 175, 55, 1)',
+                    '0 0 5px rgba(212, 175, 55, 0.5)',
+                  ],
+                } : {}}
                 transition={{ duration: 1.5, repeat: Infinity }}
-                className="text-3xl font-bold text-yellow-400"
-                // Dùng Playfair cho chữ Hán/Ký tự đặc biệt
+                className="text-xs md:text-lg font-bold text-yellow-400 text-center px-1"
                 style={{ fontFamily: "'Playfair Display', serif" }}
               >
                 {openedEnvelopes.includes(memory.id) ? '✓' : 'Lì Xì'}
@@ -151,10 +142,10 @@ export default function HaiLocGame() {
         ))}
       </div>
 
-      <div className="text-center mt-12">
-        <p className="text-yellow-400 text-lg tracking-widest"
+      <div className="text-center mt-8">
+        <p className="text-yellow-400 text-sm md:text-lg tracking-widest font-medium"
           style={{ fontFamily: "'Be Vietnam Pro', sans-serif" }}>
-          Đã mở: {openedEnvelopes.length}/5 lì xì
+          ĐÃ MỞ: {openedEnvelopes.length}/5
         </p>
       </div>
 
@@ -164,39 +155,36 @@ export default function HaiLocGame() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/95 z-[60] flex items-center justify-center p-4 backdrop-blur-md"
             onClick={() => setSelectedMemory(null)}
-            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-6 backdrop-blur-sm"
           >
             <motion.div
-              initial={{ scale: 0.5, rotateY: -180 }}
-              animate={{ scale: 1, rotateY: 0 }}
-              exit={{ scale: 0.5, rotateY: 180 }}
-              transition={{ type: 'spring', duration: 0.8 }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-2xl w-full"
+              className="relative max-w-sm md:max-w-2xl w-full"
             >
-              <div className="bg-gradient-to-br from-red-900 via-red-800 to-black p-8 rounded-2xl border-4 border-yellow-500 shadow-2xl">
+              <div className="bg-gradient-to-br from-red-950 via-red-900 to-black p-5 md:p-8 rounded-2xl border-2 md:border-4 border-yellow-500 shadow-2xl">
                 <button
                   onClick={() => setSelectedMemory(null)}
-                  className="absolute top-4 right-4 text-yellow-400 hover:text-yellow-300 transition-colors"
+                  className="absolute -top-12 right-0 text-yellow-400 hover:text-yellow-300 transition-colors"
                 >
-                  <X className="w-8 h-8" />
+                  <X className="w-10 h-10" />
                 </button>
 
-                <div className="mb-6 overflow-hidden rounded-lg border-4 border-yellow-600 shadow-xl">
+                <div className="mb-4 md:mb-6 overflow-hidden rounded-lg border-2 border-yellow-600 shadow-xl">
                   <img
                     src={selectedMemory.imageUrl}
                     alt="Memory"
-                    className="w-full h-80 object-cover"
+                    className="w-full h-64 md:h-80 object-cover"
                   />
                 </div>
 
                 <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="text-yellow-100 text-xl text-center italic leading-relaxed"
-                  // Be Vietnam Pro cho phần caption dài
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-yellow-100 text-lg md:text-xl text-center italic leading-relaxed"
                   style={{ fontFamily: "'Be Vietnam Pro', sans-serif" }}
                 >
                   "{selectedMemory.caption}"
